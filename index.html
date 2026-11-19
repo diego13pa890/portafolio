@@ -4,18 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diego Núñez | Portafolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050505;
-    --bg-card: #0f0f13;
-    --red: #ff2a2a;
-    --red-dark: #990000;
-    --red-glow: rgba(255, 42, 42, 0.4);
-    --text: #e2e2e2;
-    --muted: #888;
-    --font-main: 'Inter', sans-serif;
-    --font-code: 'Fira Code', monospace;
+    --bg: #0a0a0a;
+    --bg-card: #141414;
+    --red: #ff1a1a; /* Rojo agresivo */
+    --red-dark: #8a0000;
+    --text: #ffffff;
+    --muted: #a0a0a0;
+    --font-title: 'Montserrat', sans-serif;
+    --font-text: 'Poppins', sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,47 +23,21 @@
   body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: var(--font-main);
-    line-height: 1.6;
+    font-family: var(--font-text);
+    line-height: 1.7;
     overflow-x: hidden;
   }
 
-  /* Fondo de cuadrícula hacker */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background-image: 
-      linear-gradient(rgba(255, 42, 42, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 42, 42, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    z-index: -2;
-    pointer-events: none;
-  }
-
-  /* Resplandor que sigue al mouse */
-  .glow {
-    position: fixed;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, var(--red-glow) 0%, transparent 60%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-    opacity: 0.5;
-    transition: opacity 0.3s;
-  }
-
   a { color: var(--red); text-decoration: none; transition: color 0.3s; }
-  a:hover { color: #ff5e5e; text-shadow: 0 0 8px var(--red-glow); }
+  a:hover { color: #ff4d4d; }
 
   /* HEADER */
   header {
     position: fixed;
     top: 0; width: 100%;
-    background: rgba(5, 5, 5, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 42, 42, 0.15);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--red-dark);
     z-index: 100;
   }
   .nav {
@@ -76,53 +49,42 @@
     justify-content: space-between;
   }
   .brand {
-    font-family: var(--font-code);
-    font-size: 1rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
   .brand span { color: var(--red); }
-  .brand .cursor {
-    display: inline-block;
-    width: 8px; height: 15px;
-    background-color: var(--red);
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+  
+  .nav-links { display: flex; gap: 2rem; font-size: 0.9rem; font-weight: 600; }
+  .nav-links a { color: var(--text); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;}
+  .nav-links a:hover { color: var(--red); }
 
-  .nav-links { display: flex; gap: 2rem; font-size: 0.9rem; font-family: var(--font-code); }
-  .nav-links a { color: var(--muted); }
-  .nav-links a:hover { color: var(--red); text-shadow: none; }
-  .nav-links a::before { content: "> "; color: var(--red); opacity: 0; transition: opacity 0.3s; }
-  .nav-links a:hover::before { opacity: 1; }
-
-  /* SECCIONES GENERALES */
+  /* SECCIONES */
   section {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 6rem 2rem;
-    position: relative;
+    padding: 7rem 2rem;
   }
-  .section-header {
-    font-family: var(--font-code);
-    font-size: 1.2rem;
-    color: #fff;
+  .section-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
     margin-bottom: 3rem;
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-  .section-header::before { content: "0" counter(sec) ". "; color: var(--red); font-weight: bold; }
-  .section-header::after {
+  .section-title::before {
     content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--red-dark), transparent);
+    display: block;
+    width: 40px;
+    height: 5px;
+    background: var(--red);
   }
-  section { counter-increment: sec; }
-  body { counter-reset: sec; }
 
   /* HERO */
   .hero {
@@ -130,175 +92,158 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 80px;
-  }
-  .status-badge {
-    display: inline-block;
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    color: var(--red);
-    border: 1px solid var(--red-dark);
-    background: rgba(255, 42, 42, 0.05);
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-    width: fit-content;
-    letter-spacing: 1px;
-    animation: fadeIn 1s ease forwards;
+    padding-top: 100px;
   }
   .hero h1 {
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 800;
+    font-family: var(--font-title);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
     line-height: 1.1;
+    text-transform: uppercase;
     letter-spacing: -2px;
     margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease forwards 0.3s;
+    animation: slideUp 0.8s ease forwards;
   }
   .hero h1 .accent {
-    color: transparent;
-    -webkit-text-stroke: 1px var(--red);
-    position: relative;
-  }
-  .hero h1 .accent::after {
-    content: "Diego Núñez";
-    position: absolute;
-    left: 0; top: 0;
     color: var(--red);
-    -webkit-text-stroke: 0;
-    width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid var(--red);
-    animation: typing 2s steps(14) forwards 1s, blinkCursor 0.8s step-end infinite;
+    text-shadow: 0 0 20px rgba(255, 26, 26, 0.3);
   }
-  @keyframes typing { to { width: 100%; } }
-  @keyframes blinkCursor { 50% { border-color: transparent; } }
-
   .hero p.lead {
     font-size: 1.2rem;
     color: var(--muted);
-    max-width: 650px;
+    max-width: 600px;
     margin-bottom: 2.5rem;
+    border-left: 4px solid var(--red);
+    padding-left: 1rem;
+    animation: slideUp 1s ease forwards 0.2s;
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards 0.6s;
   }
   .hero p.lead strong { color: var(--text); font-weight: 600; }
 
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    color: var(--red);
-    border: 1px solid var(--red);
-    padding: 0.8rem 1.8rem;
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1rem 2.5rem;
+    border: none;
     border-radius: 4px;
-    font-family: var(--font-code);
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+    width: fit-content;
+    animation: slideUp 1s ease forwards 0.4s;
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards 0.9s;
   }
   .btn:hover {
-    background: rgba(255, 42, 42, 0.1);
-    box-shadow: 0 0 15px var(--red-glow);
-    text-shadow: none;
+    background: #cc0000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 26, 26, 0.3);
   }
 
-  /* SOBRE MI (Terminal Style) */
-  .about-box {
+  /* SOBRE MI */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .about-text p {
+    margin-bottom: 1.5rem;
+    color: #cccccc;
+    font-size: 1.05rem;
+  }
+  .about-text strong { color: var(--red); font-weight: 600; }
+  
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stat-box {
     background: var(--bg-card);
-    border: 1px solid #222;
-    border-radius: 8px;
-    padding: 2.5rem;
-    font-family: var(--font-code);
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 1.5rem;
+    border-left: 4px solid var(--red);
+    border-radius: 4px;
   }
-  .about-box::before {
-    content: "• • •";
-    position: absolute;
-    top: 10px; left: 15px;
-    color: #444;
-    letter-spacing: 2px;
-  }
-  .about-box p {
-    margin-bottom: 1rem;
-    color: #ccc;
-    font-size: 0.95rem;
-  }
-  .about-box .cmd { color: var(--red); font-weight: bold; }
-  .about-box .comment { color: #666; font-style: italic; }
+  .stat-box h3 { font-family: var(--font-title); font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .stat-box p { color: var(--muted); font-size: 0.95rem; }
 
   /* HABILIDADES */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
   }
   .skill-card {
     background: var(--bg-card);
-    border: 1px solid #1a1a1a;
-    padding: 1.8rem;
+    padding: 2rem;
     border-radius: 6px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .skill-card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 3px; height: 100%;
-    background: var(--red);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s, border-color 0.3s;
+    border: 1px solid #222;
   }
   .skill-card:hover {
-    border-color: #333;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border-color: var(--red);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
-  .skill-card:hover::before { transform: scaleY(1); }
-  .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
-  .skill-card p { font-size: 0.9rem; color: var(--muted); }
+  .skill-card h3 { 
+    font-family: var(--font-title); 
+    font-size: 1.3rem; 
+    margin-bottom: 1rem; 
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .skill-card p { color: var(--muted); font-size: 0.95rem; }
 
   /* PROYECTOS */
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
   }
   .project-card {
-    background: var(--bg-card);
-    border: 1px solid #1a1a1a;
+    background: #000;
+    border: 1px solid #222;
     border-radius: 6px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s;
   }
   .project-card:hover {
-    border-color: var(--red-dark);
-    box-shadow: 0 0 20px rgba(255, 42, 42, 0.1);
+    border-color: var(--red);
+  }
+  .project-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 4px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover::after {
+    transform: scaleX(1);
   }
   .project-card .tag {
-    font-family: var(--font-code);
-    font-size: 0.7rem;
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--red);
-    border: 1px solid var(--red-dark);
-    background: rgba(255, 42, 42, 0.05);
-    padding: 0.2rem 0.6rem;
+    background: rgba(255, 26, 26, 0.1);
+    padding: 0.3rem 0.8rem;
     border-radius: 4px;
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
   }
-  .project-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; color: #fff; }
-  .project-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+  .project-card h3 { font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem; }
+  .project-card p { color: var(--muted); font-size: 0.95rem; }
 
   /* CONTACTO */
-  .contact-links {
+  .contact-container {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
@@ -306,116 +251,119 @@
   .contact-item {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-family: var(--font-code);
-    font-size: 1rem;
+    gap: 1rem;
     background: var(--bg-card);
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 2rem;
     border-radius: 6px;
-    border: 1px solid #1a1a1a;
-    transition: all 0.3s;
+    border: 1px solid #222;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
   }
   .contact-item:hover {
     border-color: var(--red);
-    transform: translateY(-2px);
+    color: var(--red);
   }
-  .contact-item .icon { color: var(--red); font-weight: bold; }
 
   /* FOOTER */
   footer {
     text-align: center;
-    padding: 3rem 2rem;
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    color: #555;
-    border-top: 1px solid #111;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    border-top: 1px solid #222;
   }
-  footer .heart { color: var(--red); }
+  footer .heart { color: var(--red); font-weight: bold; }
 
-  /* ANIMACIONES SCROLL */
+  /* ANIMACIONES */
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
   }
   .reveal.active {
     opacity: 1;
     transform: translateY(0);
   }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .nav-links { display: none; }
     .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
-    .contact-links { flex-direction: column; gap: 1rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="glow" id="glow"></div>
-
 <header>
   <nav class="nav">
-    <div class="brand">
-      <span>&gt;_</span> root@diego <span>::</span> ~ <div class="cursor"></div>
-    </div>
+    <div class="brand">Diego<span>.</span>Núñez</div>
     <div class="nav-links">
-      <a href="#sobre-mi">./sobre_mi</a>
-      <a href="#habilidades">./habilidades</a>
-      <a href="#proyectos">./proyectos</a>
-      <a href="#contacto">./contacto</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
     </div>
   </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="status-badge">[ STATUS: ONLINE ] · ESTUDIANTE DE TECNOLOGÍA</div>
   <h1>Hola, soy <br><span class="accent">Diego Núñez</span></h1>
   <p class="lead">
     Tengo 16 años. No soy de hablar mucho, pero cuando agarro confianza no me callo.
-    Me gusta <strong>observar, aprender rápido y practicar por mi cuenta</strong>.
-    Actualmente explorando el desarrollo de software y la ciberseguridad en CIBERISTMO.
+    Me gusta <strong>observar, aprender rápido y practicar por mi cuenta</strong>. 
+    Explorando el desarrollo de software y la ciberseguridad.
   </p>
-  <a href="#proyectos" class="btn">&gt; Ver mis proyectos</a>
+  <a href="#proyectos" class="btn">Ver mis proyectos</a>
 </section>
 
 <!-- SOBRE MI -->
 <section id="sobre-mi" class="reveal">
-  <h2 class="section-header">Sobre mí</h2>
-  <div class="about-box">
-    <p><span class="cmd">diego@kali:~$</span> cat perfil.txt</p>
-    <p><span class="comment">// Iniciando perfil...</span></p>
-    <p>
-      Soy estudiante de 4° año del bachillerato de tecnología. Tengo 16 años y estoy intentando 
-      decidir si mi futuro va por el desarrollo de software o la ingeniería de sistemas. 
-      Participo en <strong>CIBERISTMO</strong> por diversión, por el reto y porque quiero aprender 
-      cómo funciona el mundo de la ciberseguridad.
-    </p>
-    <p>
-      Tengo conocimientos básicos en programación (Python y Arduino), pero me gusta mucho el tema 
-      y sigo aprendiendo. A lo largo de los años he empezado muchos proyectos en diferentes programas, 
-      aunque la mayoría quedaron abandonados o descontinuados por falta de tiempo o porque eran 
-      solo por diversión.
-    </p>
-    <p>
-      Mi forma de aprender es práctica: <strong>soy más de intentar, equivocarme y volver a probar</strong> 
-      hasta que las cosas salgan. Estoy construyendo un proyecto nuevo enfocado en programación 
-      y pixel art, y aunque va lento, no pienso dejarlo.
-    </p>
-    <p><span class="cmd">diego@kali:~$</span> <span class="cursor" style="height: 14px; width: 8px;"></span></p>
+  <h2 class="section-title">Sobre mí</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Soy estudiante de 4° año del bachillerato de tecnología. Estoy intentando decidir si mi futuro 
+        va por el desarrollo de software o la ingeniería de sistemas. Participo en <strong>CIBERISTMO</strong> 
+        por diversión, por el reto y porque quiero aprender cómo funciona el mundo de la ciberseguridad.
+      </p>
+      <p>
+        Tengo conocimientos básicos en programación (Python y Arduino), pero me gusta mucho el tema y sigo 
+        aprendiendo. A lo largo de los años he empezado muchos proyectos en diferentes programas, aunque la 
+        mayoría quedaron abandonados o descontinuados por falta de tiempo o porque eran solo por diversión.
+      </p>
+      <p>
+        Mi forma de aprender es práctica: <strong>soy más de intentar, equivocarme y volver a probar</strong> 
+        hasta que las cosas salgan. Estoy construyendo un proyecto nuevo enfocado en programación y pixel art, 
+        y aunque va lento, no pienso dejarlo.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <h3>Mentalidad Práctica</h3>
+        <p>Prefiero aprender haciendo y equivocándome, antes que solo leyendo teoría.</p>
+      </div>
+      <div class="stat-box">
+        <h3>Aprendizaje Rápido</h3>
+        <p>Capacidad para absorber conceptos nuevos y aplicarlos de inmediato en proyectos reales.</p>
+      </div>
+      <div class="stat-box">
+        <h3>Observador</h3>
+        <p>Analizo el entorno antes de actuar. Cuando tomo confianza, doy el 100%.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- HABILIDADES -->
 <section id="habilidades" class="reveal">
-  <h2 class="section-header">Habilidades</h2>
+  <h2 class="section-title">Habilidades</h2>
   <div class="skills-grid">
     <div class="skill-card">
       <h3>Python</h3>
@@ -426,16 +374,12 @@
       <p>Dos años de experiencia básica con programación en bloques y electrónica.</p>
     </div>
     <div class="skill-card">
-      <h3>Aprendizaje Rápido</h3>
-      <p>Capacidad de absorber conceptos nuevos y aplicarlos mediante la práctica autodidacta.</p>
+      <h3>Lógica de Programación</h3>
+      <p>Resolución de problemas, pensamiento estructurado y adaptación a distintos entornos.</p>
     </div>
     <div class="skill-card">
       <h3>Pixel Art</h3>
       <p>En desarrollo. Actualmente aprendiendo diseño visual para un proyecto personal.</p>
-    </div>
-    <div class="skill-card">
-      <h3>Lógica de Programación</h3>
-      <p>Resolución de problemas, pensamiento estructurado y adaptación a distintos entornos.</p>
     </div>
     <div class="skill-card">
       <h3>HTML & CSS</h3>
@@ -446,30 +390,30 @@
 
 <!-- PROYECTOS -->
 <section id="proyectos" class="reveal">
-  <h2 class="section-header">Proyectos</h2>
+  <h2 class="section-title">Proyectos</h2>
   <div class="projects-grid">
     <div class="project-card">
-      <span class="tag">[ EN DESARROLLO ]</span>
-      <h3>Proyecto Personal (Programación + Pixel Art)</h3>
+      <span class="tag">EN DESARROLLO</span>
+      <h3>Proyecto Personal</h3>
       <p>
         Mi proyecto actual más ambicioso. Involucra desarrollo de software y diseño de pixel art. 
         Va a su propio ritmo mientras aprendo las herramientas necesarias.
       </p>
     </div>
     <div class="project-card">
-      <span class="tag">[ APRENDIZAJE ]</span>
-      <h3>Retos CTF y Lógica en Python</h3>
+      <span class="tag">APRENDIZAJE</span>
+      <h3>Retos de Lógica y Python</h3>
       <p>
-        Resolución de problemas, ejercicios de lógica y retos de ciberseguridad (Capture The Flag). 
+        Resolución de problemas, ejercicios de lógica y retos de ciberseguridad. 
         Mi forma favorita de poner a prueba lo que aprendo.
       </p>
     </div>
     <div class="project-card">
-      <span class="tag">[ ARCHIVADO ]</span>
+      <span class="tag">ARCHIVADO</span>
       <h3>Experimentos y Prototipos</h3>
       <p>
-        Múltiples proyectos creados por pura diversión o inspiración. Algunos terminados, 
-        otros en pausa o eliminados. Cada uno me dejó experiencia y nuevas ideas.
+        Múltiples proyectos creados por pura diversión. Algunos terminados, 
+        otros en pausa. Cada uno me dejó experiencia y nuevas ideas.
       </p>
     </div>
   </div>
@@ -477,29 +421,22 @@
 
 <!-- CONTACTO -->
 <section id="contacto" class="reveal">
-  <h2 class="section-header">Contacto</h2>
-  <div class="contact-links">
+  <h2 class="section-title">Contacto</h2>
+  <div class="contact-container">
     <a href="mailto:zenunogeid@gmail.com" class="contact-item">
-      <span class="icon">@</span> zenunogeid@gmail.com
+      Correo Electrónico
     </a>
     <a href="https://github.com/diego13pa890" target="_blank" class="contact-item">
-      <span class="icon">#</span> github.com/diego13pa890
+      Perfil de GitHub
     </a>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Diego Núñez. Construido con <span class="heart">HTML & CSS</span> desde cero.</p>
+  <p>© 2026 Diego Núñez. Diseñado para destacar.</p>
 </footer>
 
 <script>
-  // Efecto de luz que sigue al mouse
-  const glow = document.getElementById('glow');
-  document.addEventListener('mousemove', (e) => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  });
-
   // Animación de aparición al hacer scroll
   const reveals = document.querySelectorAll('.reveal');
   const revealOnScroll = () => {
@@ -515,7 +452,7 @@
   };
   
   window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Ejecutar al cargar
+  revealOnScroll(); 
 </script>
 
 </body>
