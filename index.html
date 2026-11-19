@@ -1,33 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="Portafolio personal de Diego Núñez. Estudiante de tecnología interesado en programación, desarrollo de software y ciberseguridad.">
-
     <title>Diego Núñez | Portafolio</title>
 
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-
         /* =================================
            1. VARIABLES Y CONFIGURACIÓN
         ================================= */
-
         :root {
             --black: #080808;
             --black-light: #111111;
             --card: #151515;
             --red: #e50914;
             --red-light: #ff303a;
+            --red-glow: rgba(229, 9, 20, 0.15); /* Resplandor rojo */
             --white: #ffffff;
             --gray: #a3a3a3;
             --border: #292929;
@@ -53,6 +48,21 @@
             font-family: var(--font-main);
             line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo con resplandor rojo oscuro */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 0%, var(--red-glow) 0%, transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(229, 9, 20, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         a {
@@ -63,12 +73,11 @@
         /* =================================
            2. ENCABEZADO Y NAVEGACIÓN
         ================================= */
-
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(8, 8, 8, 0.96);
+            background: rgba(8, 8, 8, 0.85);
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(12px);
         }
@@ -77,7 +86,6 @@
             max-width: 1200px;
             margin: auto;
             padding: 18px 30px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -88,7 +96,8 @@
             font-family: var(--font-title);
             font-size: 25px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .brand span {
@@ -116,21 +125,19 @@
         /* =================================
            3. PRESENTACIÓN PRINCIPAL
         ================================= */
-
         .hero {
             max-width: 1200px;
             min-height: 85vh;
             margin: auto;
             padding: 100px 30px;
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-
             position: relative;
         }
 
+        /* Círculo de fondo agresivo */
         .hero::after {
             content: "";
             position: absolute;
@@ -138,9 +145,10 @@
             top: 25%;
             width: 260px;
             height: 260px;
-            border: 35px solid rgba(229, 9, 20, 0.07);
+            border: 35px solid rgba(229, 9, 20, 0.08);
             border-radius: 50%;
             z-index: -1;
+            box-shadow: 0 0 60px rgba(229, 9, 20, 0.1);
         }
 
         .status {
@@ -164,6 +172,7 @@
         .hero h1 span {
             color: var(--red);
             display: block;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3); /* Brillo en tu nombre */
         }
 
         .hero .lead {
@@ -178,18 +187,15 @@
         }
 
         /* Botones */
-
         .btn {
             display: inline-block;
             padding: 15px 30px;
             background: var(--red);
             color: var(--white);
-
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
-
             border: 1px solid var(--red);
             transition: 0.3s;
         }
@@ -198,13 +204,12 @@
             background: transparent;
             color: var(--red);
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.2);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
         }
 
         /* =================================
            4. ESTRUCTURA DE LAS SECCIONES
         ================================= */
-
         section:not(.hero) {
             max-width: 1200px;
             margin: auto;
@@ -239,13 +244,13 @@
         /* =================================
            5. SOBRE MÍ
         ================================= */
-
         .about-box {
             background: var(--black-light);
             border: 1px solid var(--border);
             border-left: 4px solid var(--red);
             padding: 40px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra para resaltar */
         }
 
         .about-box p {
@@ -265,7 +270,6 @@
         /* =================================
            6. HABILIDADES
         ================================= */
-
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -290,12 +294,14 @@
             width: 0;
             background: var(--red);
             transition: 0.3s;
+            box-shadow: 0 0 10px var(--red);
         }
 
         .skill-card:hover {
             transform: translateY(-6px);
             border-color: var(--red);
             background: #1b1b1b;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.1); /* Contorno/resplandor rojo */
         }
 
         .skill-card:hover::before {
@@ -308,6 +314,7 @@
             font-size: 30px;
             font-weight: 700;
             margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
         }
 
         .skill-card h3 {
@@ -324,7 +331,6 @@
         /* =================================
            7. PROYECTOS
         ================================= */
-
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -341,7 +347,7 @@
         .project-card:hover {
             transform: translateY(-7px);
             border-color: var(--red);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 12px 35px rgba(229, 9, 20, 0.15); /* Contorno/resplandor rojo */
         }
 
         .tag {
@@ -354,6 +360,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
         }
 
         .project-card h3 {
@@ -371,11 +378,11 @@
         /* =================================
            8. CONTACTO
         ================================= */
-
         .contact-box {
             background: var(--black-light);
             border: 1px solid var(--border);
             padding: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .contact-box > p {
@@ -407,6 +414,7 @@
             border-color: var(--red);
             color: var(--red-light);
             transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(229, 9, 20, 0.2);
         }
 
         .contact-icon {
@@ -418,7 +426,6 @@
         /* =================================
            9. PIE DE PÁGINA
         ================================= */
-
         footer {
             border-top: 1px solid var(--border);
             background: #050505;
@@ -439,7 +446,6 @@
         /* =================================
            10. ANIMACIONES
         ================================= */
-
         .reveal {
             opacity: 0;
             transform: translateY(25px);
@@ -454,58 +460,46 @@
         /* =================================
            11. DISEÑO RESPONSIVE
         ================================= */
-
         @media (max-width: 900px) {
-
             .skills-grid,
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .hero::after {
                 width: 170px;
                 height: 170px;
                 right: 3%;
             }
-
         }
 
         @media (max-width: 600px) {
-
             .nav {
                 padding: 15px 20px;
                 flex-direction: column;
                 gap: 12px;
             }
-
             .brand {
                 font-size: 23px;
             }
-
             .nav-links {
                 width: 100%;
                 justify-content: center;
                 gap: 15px;
                 flex-wrap: wrap;
             }
-
             .nav-links a {
                 font-size: 10px;
             }
-
             .hero {
                 min-height: 75vh;
                 padding: 80px 22px;
             }
-
             .hero h1 {
                 font-size: clamp(48px, 12vw, 65px);
             }
-
             .hero .lead {
                 font-size: 14px;
             }
-
             .hero::after {
                 width: 100px;
                 height: 100px;
@@ -513,74 +507,49 @@
                 top: 15%;
                 right: 5%;
             }
-
             section:not(.hero) {
                 padding: 65px 22px;
             }
-
             .section-title h2 {
                 font-size: 36px;
             }
-
             .skills-grid,
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-
-            .about-box {
-                padding: 25px;
-            }
-
+            .about-box,
             .contact-box {
                 padding: 25px;
             }
-
             .contact-links {
                 flex-direction: column;
             }
-
             .contact-item {
                 font-size: 12px;
             }
-
         }
 
-        /* Accesibilidad: reducir movimiento si el usuario lo solicita */
-
         @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
             }
-
             .reveal {
                 opacity: 1;
                 transform: none;
             }
         }
-
     </style>
-
 </head>
 
 <body>
 
-    <!-- =================================
-         ENCABEZADO
-    ================================== -->
-
     <header>
-
         <nav class="nav">
-
+            <!-- Cambiado a PORTAFOLIO en la esquina superior izquierda -->
             <a href="#inicio" class="brand">
-                DIEGO<span>.</span>NUÑEZ
+                PORTAFOLIO<span>.</span>
             </a>
 
             <div class="nav-links">
@@ -589,20 +558,11 @@
                 <a href="#proyectos">Proyectos</a>
                 <a href="#contacto">Contacto</a>
             </div>
-
         </nav>
-
     </header>
 
-
-    <!-- =================================
-         PRESENTACIÓN PRINCIPAL
-    ================================== -->
-
     <main>
-
         <section class="hero" id="inicio">
-
             <div class="status">
                 ESTUDIANTE DE TECNOLOGÍA
             </div>
@@ -621,28 +581,15 @@
             <a href="#proyectos" class="btn">
                 Ver mis proyectos →
             </a>
-
         </section>
 
-
-        <!-- =================================
-             SOBRE MÍ
-        ================================== -->
-
         <section id="sobre-mi" class="reveal">
-
             <div class="section-title">
-
                 <small>Conóceme</small>
-
-                <h2>
-                    Sobre <span>mí</span>
-                </h2>
-
+                <h2>Sobre <span>mí</span></h2>
             </div>
 
             <div class="about-box">
-
                 <p>
                     Soy estudiante de 4° año del bachillerato de tecnología.
                     Tengo 16 años y estoy intentando decidir si mi futuro va
@@ -668,30 +615,16 @@
                     proyecto nuevo enfocado en programación y pixel art,
                     y aunque va lento, no pienso dejarlo.
                 </p>
-
             </div>
-
         </section>
 
-
-        <!-- =================================
-             HABILIDADES
-        ================================== -->
-
         <section id="habilidades" class="reveal">
-
             <div class="section-title">
-
                 <small>Lo que estoy aprendiendo</small>
-
-                <h2>
-                    Mis <span>habilidades</span>
-                </h2>
-
+                <h2>Mis <span>habilidades</span></h2>
             </div>
 
             <div class="skills-grid">
-
                 <article class="skill-card">
                     <div class="skill-number">01</div>
                     <h3>Python</h3>
@@ -745,106 +678,57 @@
                         la marcha, enfocado en el diseño visual.
                     </p>
                 </article>
-
             </div>
-
         </section>
 
-
-        <!-- =================================
-             PROYECTOS
-        ================================== -->
-
         <section id="proyectos" class="reveal">
-
             <div class="section-title">
-
                 <small>Mi trabajo</small>
-
-                <h2>
-                    Mis <span>proyectos</span>
-                </h2>
-
+                <h2>Mis <span>proyectos</span></h2>
             </div>
 
             <div class="projects-grid">
-
                 <article class="project-card">
-
                     <span class="tag">En desarrollo</span>
-
-                    <h3>
-                        Proyecto Personal
-                        (Programación + Pixel Art)
-                    </h3>
-
+                    <h3>Proyecto Personal (Programación + Pixel Art)</h3>
                     <p>
                         Mi proyecto actual más ambicioso. Involucra
                         desarrollo de software y diseño de pixel art.
                         Va a su propio ritmo mientras aprendo
                         las herramientas necesarias.
                     </p>
-
                 </article>
 
-
                 <article class="project-card">
-
                     <span class="tag">Aprendizaje</span>
-
-                    <h3>
-                        Retos CTF y Lógica en Python
-                    </h3>
-
+                    <h3>Retos CTF y Lógica en Python</h3>
                     <p>
                         Resolución de problemas, ejercicios de lógica
                         y retos de ciberseguridad (Capture The Flag).
                         Mi forma favorita de poner a prueba lo que aprendo.
                     </p>
-
                 </article>
 
-
                 <article class="project-card">
-
                     <span class="tag">Archivado</span>
-
-                    <h3>
-                        Experimentos y Prototipos
-                    </h3>
-
+                    <h3>Experimentos y Prototipos</h3>
                     <p>
                         Múltiples proyectos creados por pura diversión
                         o inspiración. Algunos terminados, otros en pausa
                         o eliminados. Cada uno me dejó experiencia
                         y nuevas ideas.
                     </p>
-
                 </article>
-
             </div>
-
         </section>
 
-
-        <!-- =================================
-             CONTACTO
-        ================================== -->
-
         <section id="contacto" class="reveal">
-
             <div class="section-title">
-
                 <small>Hablemos</small>
-
-                <h2>
-                    Ponte en <span>contacto</span>
-                </h2>
-
+                <h2>Ponte en <span>contacto</span></h2>
             </div>
 
             <div class="contact-box">
-
                 <p>
                     Si quieres conocer más sobre mis proyectos,
                     intercambiar ideas o hablar de tecnología,
@@ -852,91 +736,39 @@
                 </p>
 
                 <div class="contact-links">
-
-                    <a href="mailto:zenunogeid@gmail.com"
-                       class="contact-item">
-
+                    <a href="mailto:zenunogeid@gmail.com" class="contact-item">
                         <span class="contact-icon">@</span>
                         zenunogeid@gmail.com
-
                     </a>
 
-                    <a href="https://github.com/diego13pa890"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="contact-item">
-
+                    <a href="https://github.com/diego13pa890" target="_blank" rel="noopener noreferrer" class="contact-item">
                         <span class="contact-icon">#</span>
                         github.com/diego13pa890
-
                     </a>
-
                 </div>
-
             </div>
-
         </section>
-
     </main>
 
-
-    <!-- =================================
-         PIE DE PÁGINA
-    ================================== -->
-
     <footer>
-
-        <p>
-            © 2026 Diego Núñez.
-            Diseñado con <span>HTML & CSS</span>.
-        </p>
-
+        <p>© 2026 Diego Núñez. Diseñado con <span>HTML & CSS</span>.</p>
     </footer>
 
-
-    <!-- =================================
-         JAVASCRIPT: ANIMACIONES AL SCROLL
-    ================================== -->
-
     <script>
-
         const reveals = document.querySelectorAll('.reveal');
-
-        // Detecta cuándo una sección aparece en pantalla.
         if ('IntersectionObserver' in window) {
-
             const observer = new IntersectionObserver((entries) => {
-
                 entries.forEach((entry) => {
-
                     if (entry.isIntersecting) {
-
                         entry.target.classList.add('active');
-
                         observer.unobserve(entry.target);
-
                     }
-
                 });
-
-            }, {
-                threshold: 0.10
-            });
-
-            reveals.forEach((element) => {
-                observer.observe(element);
-            });
-
+            }, { threshold: 0.10 });
+            reveals.forEach((element) => { observer.observe(element); });
         } else {
-
-            // Alternativa para navegadores antiguos.
-            reveals.forEach((element) => {
-                element.classList.add('active');
-            });
-
+            reveals.forEach((element) => { element.classList.add('active'); });
         }
-
     </script>
-
 </body>
 </html>
