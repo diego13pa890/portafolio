@@ -10,22 +10,21 @@
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         /* =================================
            1. VARIABLES Y CONFIGURACIÓN
         ================================= */
         :root {
-            --black: #080808;
-            --black-light: #111111;
-            --card: #151515;
-            --red: #e50914;
-            --red-light: #ff303a;
-            --red-glow: rgba(229, 9, 20, 0.15); /* Resplandor rojo */
-            --white: #ffffff;
-            --gray: #a3a3a3;
-            --border: #292929;
+            --black: #050505;
+            --black-light: #0d0d0d;
+            --card: #121212;
+            --red: #d90429; /* Un rojo un poco más oscuro y agresivo */
+            --red-light: #ef233c;
+            --white: #f8f9fa;
+            --gray: #8b8b8b;
+            --border: #222222;
 
             --font-main: 'Montserrat', sans-serif;
             --font-title: 'Oswald', sans-serif;
@@ -51,7 +50,7 @@
             position: relative;
         }
 
-        /* Fondo con resplandor rojo oscuro */
+        /* Efecto de Scanlines (líneas de escaneo sutiles) para un look agresivo */
         body::before {
             content: "";
             position: fixed;
@@ -59,8 +58,27 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 50% 0%, var(--red-glow) 0%, transparent 60%),
-                        radial-gradient(circle at 100% 100%, rgba(229, 9, 20, 0.05) 0%, transparent 50%);
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* Resplandor de fondo rojo profundo */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(217, 4, 41, 0.08) 0%, transparent 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -76,16 +94,16 @@
         header {
             position: sticky;
             top: 0;
-            z-index: 1000;
-            background: rgba(8, 8, 8, 0.85);
+            z-index: 999;
+            background: rgba(5, 5, 5, 0.9);
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .nav {
             max-width: 1200px;
             margin: auto;
-            padding: 18px 30px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -94,7 +112,7 @@
 
         .brand {
             font-family: var(--font-title);
-            font-size: 25px;
+            font-size: 28px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -102,24 +120,43 @@
 
         .brand span {
             color: var(--red);
+            text-shadow: 0 0 10px rgba(217, 4, 41, 0.8);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 35px;
             align-items: center;
         }
 
         .nav-links a {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--gray);
             text-transform: uppercase;
+            position: relative;
             transition: 0.3s;
         }
 
+        /* Efecto de subrayado agresivo */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--red);
+        }
+
         .nav-links a:hover {
-            color: var(--red);
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* =================================
@@ -127,9 +164,9 @@
         ================================= */
         .hero {
             max-width: 1200px;
-            min-height: 85vh;
+            min-height: 90vh;
             margin: auto;
-            padding: 100px 30px;
+            padding: 120px 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -137,74 +174,113 @@
             position: relative;
         }
 
-        /* Círculo de fondo agresivo */
+        /* Círculo de fondo cortado */
         .hero::after {
             content: "";
             position: absolute;
-            right: 5%;
-            top: 25%;
-            width: 260px;
-            height: 260px;
-            border: 35px solid rgba(229, 9, 20, 0.08);
+            right: 10%;
+            top: 30%;
+            width: 250px;
+            height: 250px;
+            border: 2px dashed rgba(217, 4, 41, 0.3);
             border-radius: 50%;
             z-index: -1;
-            box-shadow: 0 0 60px rgba(229, 9, 20, 0.1);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
 
         .status {
             color: var(--red);
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 800;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Pequeño cuadro parpadeante antes del status */
+        .status::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .hero h1 {
             font-family: var(--font-title);
-            font-size: clamp(55px, 9vw, 105px);
-            line-height: 1.05;
+            font-size: clamp(60px, 10vw, 120px);
+            line-height: 1;
             text-transform: uppercase;
             font-weight: 700;
             margin-bottom: 25px;
+            letter-spacing: -1px;
         }
 
         .hero h1 span {
-            color: var(--red);
+            color: var(--white);
             display: block;
-            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3); /* Brillo en tu nombre */
+            -webkit-text-stroke: 1px var(--red);
+            color: transparent;
+            text-shadow: 4px 4px 0px var(--red); /* Sombra dura agresiva */
+            transition: 0.3s;
+        }
+
+        .hero h1:hover span {
+            text-shadow: -4px -4px 0px var(--red);
+            color: var(--white);
+            -webkit-text-stroke: 0;
         }
 
         .hero .lead {
             max-width: 650px;
-            font-size: 16px;
+            font-size: 17px;
             color: var(--gray);
-            margin-bottom: 35px;
+            margin-bottom: 40px;
+            border-left: 3px solid var(--red);
+            padding-left: 20px;
         }
 
         .hero .lead strong {
             color: var(--white);
+            font-weight: 800;
         }
 
-        /* Botones */
+        /* Botón con estilo único */
         .btn {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 18px 40px;
             background: var(--red);
             color: var(--white);
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            border: 1px solid var(--red);
+            border: none;
+            position: relative;
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); /* Esquinas cortadas */
             transition: 0.3s;
         }
 
         .btn:hover {
-            background: transparent;
-            color: var(--red);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(217, 4, 41, 0.4);
         }
 
         /* =================================
@@ -213,32 +289,46 @@
         section:not(.hero) {
             max-width: 1200px;
             margin: auto;
-            padding: 90px 30px;
+            padding: 100px 30px;
         }
 
         .section-title {
-            margin-bottom: 45px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
         }
 
         .section-title small {
             display: block;
-            color: var(--red);
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 3px;
+            color: var(--gray);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 10px;
         }
 
         .section-title h2 {
             font-family: var(--font-title);
-            font-size: clamp(35px, 5vw, 50px);
+            font-size: clamp(40px, 5vw, 60px);
             text-transform: uppercase;
-            line-height: 1.2;
+            line-height: 1.1;
+            letter-spacing: 1px;
         }
 
         .section-title h2 span {
             color: var(--red);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            width: 50px;
+            height: 4px;
+            background: var(--red);
+            box-shadow: 0 0 15px var(--red);
         }
 
         /* =================================
@@ -247,209 +337,194 @@
         .about-box {
             background: var(--black-light);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--red);
-            padding: 40px;
+            padding: 45px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra para resaltar */
+            transition: 0.3s;
+        }
+
+        .about-box:hover {
+            border-color: rgba(217, 4, 41, 0.5);
+            box-shadow: inset 0 0 20px rgba(217, 4, 41, 0.05);
         }
 
         .about-box p {
             color: var(--gray);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .about-box p:last-child {
-            margin-bottom: 0;
+            font-size: 15px;
+            margin-bottom: 25px;
         }
 
         .about-box strong {
             color: var(--white);
+            background: rgba(217, 4, 41, 0.2);
+            padding: 2px 5px;
         }
 
         /* =================================
-           6. HABILIDADES
+           6. HABILIDADES Y PROYECTOS
         ================================= */
-        .skills-grid {
+        .skills-grid, .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 25px;
         }
 
-        .skill-card {
+        .skill-card, .project-card {
             background: var(--card);
             border: 1px solid var(--border);
-            padding: 30px;
-            transition: 0.3s;
+            padding: 35px;
             position: relative;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
         }
 
-        .skill-card::before {
+        /* Línea agresiva lateral */
+        .skill-card::before, .project-card::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
-            height: 3px;
-            width: 0;
+            height: 100%;
+            width: 4px;
             background: var(--red);
-            transition: 0.3s;
-            box-shadow: 0 0 10px var(--red);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s ease;
         }
 
-        .skill-card:hover {
-            transform: translateY(-6px);
+        .skill-card:hover, .project-card:hover {
+            transform: translateY(-10px);
             border-color: var(--red);
-            background: #1b1b1b;
-            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.1); /* Contorno/resplandor rojo */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(217, 4, 41, 0.2);
         }
 
-        .skill-card:hover::before {
-            width: 100%;
+        .skill-card:hover::before, .project-card:hover::before {
+            transform: scaleY(1);
         }
 
         .skill-number {
-            color: var(--red);
+            color: transparent;
+            -webkit-text-stroke: 1px var(--red);
             font-family: var(--font-title);
-            font-size: 30px;
+            font-size: 45px;
             font-weight: 700;
+            line-height: 1;
             margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
-        }
-
-        .skill-card h3 {
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .skill-card p {
-            font-size: 13px;
-            color: var(--gray);
-        }
-
-        /* =================================
-           7. PROYECTOS
-        ================================= */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 35px 30px;
+            opacity: 0.5;
             transition: 0.3s;
         }
 
-        .project-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--red);
-            box-shadow: 0 12px 35px rgba(229, 9, 20, 0.15); /* Contorno/resplandor rojo */
+        .skill-card:hover .skill-number {
+            opacity: 1;
+            color: var(--red);
+            -webkit-text-stroke: 0;
+            text-shadow: 0 0 15px var(--red);
+        }
+
+        .skill-card h3, .project-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .skill-card p, .project-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
         }
 
         .tag {
             display: inline-block;
-            background: rgba(229, 9, 20, 0.12);
+            background: transparent;
             color: var(--red-light);
-            padding: 6px 12px;
-            font-size: 10px;
+            padding: 5px 10px;
+            font-size: 11px;
             font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            border: 1px solid rgba(229, 9, 20, 0.3);
-        }
-
-        .project-card h3 {
-            font-size: 17px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .project-card p {
-            color: var(--gray);
-            font-size: 13px;
+            border: 1px solid var(--red);
+            box-shadow: 0 0 10px rgba(217, 4, 41, 0.2);
         }
 
         /* =================================
-           8. CONTACTO
+           7. CONTACTO
         ================================= */
         .contact-box {
             background: var(--black-light);
             border: 1px solid var(--border);
-            padding: 45px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 50px;
+            border-top: 4px solid var(--red);
         }
 
         .contact-box > p {
             color: var(--gray);
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: 15px;
+            margin-bottom: 35px;
         }
 
         .contact-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 15px 20px;
+            gap: 15px;
+            padding: 18px 25px;
             background: var(--card);
             border: 1px solid var(--border);
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             transition: 0.3s;
-            overflow-wrap: anywhere;
+            position: relative;
+            overflow: hidden;
         }
 
         .contact-item:hover {
             border-color: var(--red);
-            color: var(--red-light);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(229, 9, 20, 0.2);
+            color: var(--white);
+            background: rgba(217, 4, 41, 0.1);
+            transform: translateX(5px);
         }
 
         .contact-icon {
             color: var(--red);
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 900;
         }
 
         /* =================================
-           9. PIE DE PÁGINA
+           8. PIE DE PÁGINA
         ================================= */
         footer {
             border-top: 1px solid var(--border);
-            background: #050505;
+            background: var(--black);
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
 
         footer p {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         footer span {
             color: var(--red);
-            font-weight: 800;
+            font-weight: 900;
         }
 
         /* =================================
-           10. ANIMACIONES
+           9. ANIMACIONES Y RESPONSIVE
         ================================= */
         .reveal {
             opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         .reveal.active {
@@ -457,18 +532,12 @@
             transform: translateY(0);
         }
 
-        /* =================================
-           11. DISEÑO RESPONSIVE
-        ================================= */
         @media (max-width: 900px) {
-            .skills-grid,
-            .projects-grid {
+            .skills-grid, .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .hero::after {
-                width: 170px;
-                height: 170px;
-                right: 3%;
+            .hero h1 span {
+                text-shadow: 2px 2px 0px var(--red);
             }
         }
 
@@ -476,10 +545,7 @@
             .nav {
                 padding: 15px 20px;
                 flex-direction: column;
-                gap: 12px;
-            }
-            .brand {
-                font-size: 23px;
+                gap: 15px;
             }
             .nav-links {
                 width: 100%;
@@ -487,57 +553,29 @@
                 gap: 15px;
                 flex-wrap: wrap;
             }
-            .nav-links a {
-                font-size: 10px;
-            }
             .hero {
-                min-height: 75vh;
-                padding: 80px 22px;
+                padding: 90px 20px;
             }
             .hero h1 {
-                font-size: clamp(48px, 12vw, 65px);
-            }
-            .hero .lead {
-                font-size: 14px;
+                font-size: clamp(50px, 15vw, 70px);
             }
             .hero::after {
-                width: 100px;
-                height: 100px;
-                border-width: 15px;
-                top: 15%;
-                right: 5%;
+                width: 150px;
+                height: 150px;
+                right: -5%;
+                top: 10%;
             }
             section:not(.hero) {
-                padding: 65px 22px;
+                padding: 70px 20px;
             }
-            .section-title h2 {
-                font-size: 36px;
-            }
-            .skills-grid,
-            .projects-grid {
+            .skills-grid, .projects-grid {
                 grid-template-columns: 1fr;
             }
-            .about-box,
-            .contact-box {
-                padding: 25px;
+            .about-box, .contact-box {
+                padding: 30px 20px;
             }
             .contact-links {
                 flex-direction: column;
-            }
-            .contact-item {
-                font-size: 12px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-            .reveal {
-                opacity: 1;
-                transform: none;
             }
         }
     </style>
@@ -547,7 +585,6 @@
 
     <header>
         <nav class="nav">
-            <!-- Cambiado a PORTAFOLIO en la esquina superior izquierda -->
             <a href="#inicio" class="brand">
                 PORTAFOLIO<span>.</span>
             </a>
